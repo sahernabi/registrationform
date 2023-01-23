@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+</head>
+<body>
+  <form onsubmit="return validateform()">
+    <div id="one">
+      <div id="heading">REGISTRATION FORM</div>
+    <div class="two">
+        <span class="head">First Name</span><input type="text" name="fname" id="fn" style="margin-left:20px;">
+        <span class="error" id="first" style="margin-left:20px;">please enter your first name</span>
+    </div>
+    <div class="two" style="margin-top:20px;">
+      <span class="head">Last Name</span><input type="text" name="lname" id="ln" style="margin-left:20px;">
+      <span class="error" id="last" style="margin-left:20px;">please enter your last name</span>
+  </div><br>
+  <div>
+  <div class="head2">
+   <span> Gender </span> 
+   <span style="margin-left:80px;"> Male</span><input type="radio" name="gender" value="male">
+    <span style="margin-left:100px;">Female</span><input type="radio" name="gender" value="female">
+  </div><br>
+  <div class="head2">
+  <span>Age</span><input type="text"id="age" style="margin-left:150px;">
+  <span id="errorage"></span>
+  </div>
+  <div class="head2">
+    <span>Address</span><input type="textarea" placeholder="please enter your correspondance address" id="remaining">
+    <span id="char" >Number of characters left:</span><span id="acc">100</span>
+  </div>
+  <div class="head2">
+   <span >District</span>
+    <select id="slt">
+      <option></option>  
+      <option value="sgr">Srinagar</option>
+      <option value="antg">Anantnag</option>
+      <option value="pul">Pulwama</option>
+      <option value="kup">Kupwara</option>
+      <option value="shp">Shopian</option>
+      <option value="brml">Baramulla</option>
+      <option value="hnd">Handwara</option>
+      <option value="bud">Budgam</option>
+      <option value="gnd">Ganderbal</option>
+      <option value="kgm">kulgam</option>
+    </select>
+
+<button id="sub">Submit</button>
+    </div>
+  </form>  
+</body>
+</html>
+<script type="text/javascript">
+  function validateform(){
+  document.getElementById('sub').style.borderColor='red';
+  x=document.getElementById('fn').value;
+  y=document.getElementById('ln').value;
+  temp=document.getElementById('age').value;
+
+  if(x==''){
+    document.getElementById('first').style.visibility='visible';
+  }
+  else{
+    document.getElementById('first').style.visibility='hidden';
+
+  }
+  if(y==''){
+    document.getElementById('last').style.visibility='visible';
+
+  }
+    else{
+    document.getElementById('last').style.visibility='hidden';
+
+    }
+    if(temp=='')
+   {
+    document.getElementById('errorage').innerHTML="** please enter the age"
+    return false;
+   }
+   if(isNaN(temp)){
+    document.getElementById('errorage').innerHTML="** Enter only numberic values"
+     return false;
+    
+   }
+    if(x!='' && y!=''){
+     return true;
+    }
+    else{
+      return false;
+   }
+  
+  }
+  maxcount=100;
+  counter=document.getElementById('acc');
+  area=document.getElementById('remaining')
+  area.addEventListener('keydown',function(e)
+  {    
+    if(maxcount==0 && e.key!='Backspace'|| maxcount==100 && e.key=='Backspace')
+   {
+    e.preventDefault();
+    return;
+   } 
+   if(e.key=='Backspace')
+   {
+    maxcount=maxcount+1;
+    counter.innerHTML=maxcount;
+   }
+   else{
+   maxcount=maxcount-1;
+   counter.innerHTML=maxcount;
+   }
+  
+ } )
+ 
+    
+  
+</script>
+<style type="text/css">
+    
+    #one{
+        background-color:lightpink;
+        width:80%;
+        margin-left:auto;
+        margin-right: auto;
+        padding: 20px;
+        height: 1000px;
+    }
+    #heading{
+      font-size: 38px;
+      font-weight: 900;
+      margin-left: 350px;
+      color: slateblue;
+      font-family:Verdana, Geneva, Tahoma, sans-serif;
+      
+    }
+    .two{
+      margin-left: 200px;
+      margin-top: 40px;
+    }
+    .head{
+      font-weight: 700;
+      font-size: 26px;
+      margin-left: 30px;
+      
+    }
+    .head2{
+      font-weight: 700;
+      font-size: 26px;
+      margin-left: 220px;
+      padding: 10px;
+      
+    }
+    input[type=text]{
+      width: 300px;
+      height: 40px;
+      outline: none;
+      border: none;
+
+    }
+    input[type=number]{
+      width: 300px;
+      height: 40px;
+      margin-left: 150px;
+      outline: none;
+      border: none;
+
+
+    }
+    input[type=textarea]{
+      width: 500px;
+      height: 200px;
+      margin-left: 100px;
+      outline: none;
+      border: none;
+      text-indent: 20px;   
+    }
+    
+    #slt{
+      width: 300px;
+      height: 40px;
+      margin-left: 100px;
+      border: none;
+
+    }
+    
+    .error{
+      color: red;
+      font-size:20px;
+      visibility: hidden;
+    }
+    #errorage{
+      color: red;
+      font-size:20px;
+      
+    }
+    #char{
+      color: red;
+      font-size:20px;
+      margin-left: 200px;
+    }
+
+    #sub{
+      width: 250px;
+      height: 70px;
+      margin-left: 300px;
+      background-color: yellowgreen;
+      margin-top: 60px;
+      font-size:22px
+    }
+</style>
